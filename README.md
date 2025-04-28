@@ -1,133 +1,164 @@
-# petmatch
-O PetMatch é uma plataforma que conecta adotantes e doadores de animais de estimação.
-O sistema permitirá o cadastro de usuários, a gestão de animais disponíveis para adoção, além de registros de processos de adoções e doações.
+# 🐾 PetMatch
 
-Explicação da escolha das entidades e como se relacionam:
-	•	Usuário: é quem realiza cadastros de animais ou busca para adoção. Pode ser doador ou adotante.
-	•	Animal: representa o pet que pode ser doado ou adotado.
-	•	Adoção: registra o processo de um usuário adotando um animal.
-	•	Doação: registra o processo de um usuário doando um animal.
+**PetMatch** é uma plataforma que conecta adotantes e doadores de animais de estimação.  
+O sistema permite o cadastro de usuários, a gestão de animais disponíveis para adoção e o registro dos processos de adoções e doações.
 
-As entidades se relacionam da seguinte forma:
-	•	Um Usuário pode cadastrar vários Animais.
-	•	Um Animal pode estar associado a um processo de Adoção ou Doação.
-	•	Um Usuário pode realizar várias Adoções ou Doações.
+---
 
-⸻
+## 📚 Entidades e Relacionamentos
 
-Explicações de Cada Tela
+- **Usuário**: Realiza o cadastro de animais ou busca por adoção. Pode ser **doador** ou **adotante**.
+- **Animal**: Representa o pet disponível para doação ou adoção.
+- **Adoção**: Registra o processo de um usuário adotando um animal.
+- **Doação**: Registra o processo de um usuário doando um animal.
 
-Usuário
-	•	Campos de cadastro:
-	•	Nome
-	•	E-mail
-	•	Telefone
-	•	Endereço
-	•	Tipo de usuário (Adotante/Doador)
-	•	Campos obrigatórios:
-	•	Nome
-	•	E-mail
-	•	Tipo de usuário
-	•	Validações:
-	•	E-mail válido
-	•	Telefone (formato válido, ex: (XX) XXXXX-XXXX)
-	•	Dados de listagem:
-	•	Nome
-	•	E-mail
-	•	Tipo de usuário
-	•	Campos de busca:
-	•	Nome
-	•	Tipo de usuário
-	•	Quais campos serão editáveis:
-	•	Nome
-	•	E-mail
-	•	Telefone
-	•	Endereço
-	•	Fluxo de edição:
-	•	Usuário seleciona o usuário na lista > Clica em editar > Altera os campos permitidos > Salva.
-	•	Fluxo de exclusão:
-	•	Usuário seleciona o usuário na lista > Clica em excluir > Confirma exclusão.
+**Relacionamentos:**
 
-⸻
+- Um **usuário** pode cadastrar vários **animais**.
+- Um **animal** pode estar associado a um processo de **adoção** ou **doação**.
+- Um **usuário** pode realizar várias **adoções** e **doações**.
 
-Animal
-	•	Campos de cadastro:
-	•	Nome do animal
-	•	Espécie
-	•	Raça
-	•	Idade
-	•	Porte
-	•	Status (Disponível para adoção ou doação)
-	•	Campos obrigatórios:
-	•	Nome
-	•	Espécie
-	•	Status
-	•	Validações:
-	•	Idade deve ser um número válido
-	•	Dados de listagem:
-	•	Nome
-	•	Espécie
-	•	Porte
-	•	Status
-	•	Campos de busca:
-	•	Nome do animal
-	•	Espécie
-	•	Porte
-	•	Quais campos serão editáveis:
-	•	Todos (Nome, Espécie, Raça, Idade, Porte, Status)
-	•	Fluxo de edição:
-	•	Usuário seleciona o animal na lista > Clica em editar > Altera campos > Salva.
-	•	Fluxo de exclusão:
-	•	Usuário seleciona o animal na lista > Clica em excluir > Confirma exclusão.
+---
 
-⸻
+## 🧩 Funcionalidades por Tela
 
-Adoção
-	•	Campos de cadastro:
-	•	Usuário (Adotante)
-	•	Animal
-	•	Data da adoção
-	•	Campos obrigatórios:
-	•	Usuário
-	•	Animal
-	•	Validações:
-	•	Um animal só pode ser adotado uma vez (não pode ter duas adoções ativas para o mesmo animal).
-	•	Dados de listagem:
-	•	Nome do adotante
-	•	Nome do animal
-	•	Data da adoção
-	•	Campos de busca:
-	•	Nome do adotante
-	•	Nome do animal
-	•	Quais campos serão editáveis:
-	•	Nenhum campo pode ser alterado após a adoção confirmada (opcional: editar apenas a data).
-	•	Fluxo de edição:
-	•	Se permitido, usuário edita a data da adoção.
-	•	Fluxo de exclusão:
-	•	Usuário seleciona a adoção na lista > Clica em excluir > Confirma exclusão.
+### Usuário
 
-⸻
+- **Campos de Cadastro:**
+  - Nome
+  - E-mail
+  - Telefone
+  - Endereço
+  - Tipo de usuário (Adotante / Doador)
 
-Doação
-	•	Campos de cadastro:
-	•	Usuário (Doador)
-	•	Animal
-	•	Data da doação
-	•	Campos obrigatórios:
-	•	Usuário
-	•	Animal
-	•	Validações:
-	•	Um animal doado não pode ser doado novamente.
-	•	Dados de listagem:
-	•	Nome do doador
-	•	Nome do animal
-	•	Data da doação
-	•	Campos de busca:
-	•	Nome do doador
-	•	Nome do animal
-	•	Quais campos serão editáveis:
-	•	Nenhum campo (padrão).
-	•	Fluxo de edição:
-	•	Caso necessário, apenas editar a data da doação.
-	•	Fluxo de exclusão:
-	•	Usuário seleciona a doação na lista > Clica em excluir > Confirma exclusão
+- **Campos Obrigatórios:**
+  - Nome
+  - E-mail
+  - Tipo de usuário
+
+- **Validações:**
+  - E-mail válido
+  - Telefone no formato (XX) XXXXX-XXXX
+
+- **Dados de Listagem:**
+  - Nome
+  - E-mail
+  - Tipo de usuário
+
+- **Campos de Busca:**
+  - Nome
+  - Tipo de usuário
+
+- **Campos Editáveis:**
+  - Nome
+  - E-mail
+  - Telefone
+  - Endereço
+
+- **Fluxos:**
+  - **Edição:** Selecionar usuário > Editar campos permitidos > Salvar.
+  - **Exclusão:** Selecionar usuário > Clicar em excluir > Confirmar.
+
+---
+
+### Animal
+
+- **Campos de Cadastro:**
+  - Nome do animal
+  - Espécie
+  - Raça
+  - Idade
+  - Porte
+  - Status (Disponível para adoção ou doação)
+
+- **Campos Obrigatórios:**
+  - Nome
+  - Espécie
+  - Status
+
+- **Validações:**
+  - Idade deve ser um número válido
+
+- **Dados de Listagem:**
+  - Nome
+  - Espécie
+  - Porte
+  - Status
+
+- **Campos de Busca:**
+  - Nome do animal
+  - Espécie
+  - Porte
+
+- **Campos Editáveis:**
+  - Todos (Nome, Espécie, Raça, Idade, Porte, Status)
+
+- **Fluxos:**
+  - **Edição:** Selecionar animal > Editar campos > Salvar.
+  - **Exclusão:** Selecionar animal > Clicar em excluir > Confirmar.
+
+---
+
+### Adoção
+
+- **Campos de Cadastro:**
+  - Usuário (Adotante)
+  - Animal
+  - Data da adoção
+
+- **Campos Obrigatórios:**
+  - Usuário
+  - Animal
+
+- **Validações:**
+  - Um animal só pode ser adotado uma vez (não pode ter múltiplas adoções ativas).
+
+- **Dados de Listagem:**
+  - Nome do adotante
+  - Nome do animal
+  - Data da adoção
+
+- **Campos de Busca:**
+  - Nome do adotante
+  - Nome do animal
+
+- **Campos Editáveis:**
+  - Nenhum campo pode ser alterado após confirmação (opcionalmente, apenas a data).
+
+- **Fluxos:**
+  - **Edição:** (Se permitido) Editar a data da adoção.
+  - **Exclusão:** Selecionar adoção > Clicar em excluir > Confirmar.
+
+---
+
+### Doação
+
+- **Campos de Cadastro:**
+  - Usuário (Doador)
+  - Animal
+  - Data da doação
+
+- **Campos Obrigatórios:**
+  - Usuário
+  - Animal
+
+- **Validações:**
+  - Um animal doado não pode ser doado novamente.
+
+- **Dados de Listagem:**
+  - Nome do doador
+  - Nome do animal
+  - Data da doação
+
+- **Campos de Busca:**
+  - Nome do doador
+  - Nome do animal
+
+- **Campos Editáveis:**
+  - Nenhum (padrão; opcionalmente apenas a data da doação).
+
+- **Fluxos:**
+  - **Edição:** (Se necessário) Editar a data da doação.
+  - **Exclusão:** Selecionar doação > Clicar em excluir > Confirmar.
+
+---
