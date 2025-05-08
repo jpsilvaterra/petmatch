@@ -4,8 +4,8 @@
   "description": "**PetMatch** é uma plataforma que conecta adotantes e doadores de animais de estimação.  \r O sistema permite o cadastro de usuários, a gestão de animais disponíveis para adoção e o registro dos processos de adoções e doações.",
   "main": "index.js",
   "scripts": {
-    "build": "tsc", 
-    "dev": "tsx watch src/server.ts", 
+    "build": "tsc",
+    "dev": "tsx watch src/server.ts",
     "start": "node build/server.js"
   },
   "repository": {
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/jpsilvaterra/petmatch#readme",
   "dependencies": {
     "@prisma/client": "^6.7.0",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "zod": "^3.24.4"
