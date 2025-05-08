@@ -1,0 +1,36 @@
+{
+  "name": "petmatch",
+  "version": "1.0.0",
+  "description": "**PetMatch** é uma plataforma que conecta adotantes e doadores de animais de estimação.  \r O sistema permite o cadastro de usuários, a gestão de animais disponíveis para adoção e o registro dos processos de adoções e doações.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc", 
+    "dev": "tsx watch src/server.ts", 
+    "start": "node build/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpsilvaterra/petmatch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpsilvaterra/petmatch/issues"
+  },
+  "homepage": "https://github.com/jpsilvaterra/petmatch#readme",
+  "dependencies": {
+    "@prisma/client": "^6.7.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.15.16",
+    "prisma": "^6.7.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

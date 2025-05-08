@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// tabela User
+model User {
+  id                Int      @id @default(autoincrement())
+  name              String   @db.VarChar(255)
+  email             String   @db.VarChar(255)
+  password          String   @db.VarChar(255)
+  phone             String   @db.VarChar(20)
+  profilePictureUrl String?
+  description       String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  pets              Pets[]
+  addressId         Int?
+  address           Address? @relation(fields: [addressId], references: [id])
+}
+
+// tabela Pets
+model Pets {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(255)
+  breed       String    @db.VarChar(255)
+  birthDate   DateTime
+  description String?
+  photo_url   String?
+  status      PetStatus @default(Unavailable)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  ownerId     Int?
+  owner       User?     @relation(fields: [ownerId], references: [id])
+}
+
+enum PetStatus {
+  Available
+  Unavailable
+}
+
+// tabela Address
+model Address {
+  id        Int      @id @default(autoincrement())
+  street    String
+  state     String   @db.VarChar(255)
+  zip       String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  owners    User[]
+}
