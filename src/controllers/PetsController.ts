@@ -12,6 +12,7 @@ export class PetsController {
   index: Handler = async (req, res, next) => {
     try {
       const pets = await prisma.pets.findMany();
+
       res.json(pets);
     } catch (error) {
       next(error);
@@ -34,6 +35,7 @@ export class PetsController {
           status,
         },
       });
+
       res.status(201).json(newPet);
     } catch (error) {
       next(error);
@@ -49,8 +51,8 @@ export class PetsController {
           owner: true,
         },
       });
-
       if (!pet) throw new HttpError(404, 'Pet não encontrado');
+
       res.json(pet);
     } catch (error) {
       next(error);
@@ -73,6 +75,7 @@ export class PetsController {
         data: data,
         where: { id: +req.params.id },
       });
+
       res.json(updatedPet);
     } catch (error) {
       next(error);

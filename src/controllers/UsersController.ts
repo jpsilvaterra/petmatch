@@ -13,6 +13,7 @@ export class UsersController {
   index: Handler = async (req, res, next) => {
     try {
       const users = await prisma.user.findMany();
+
       res.json(users);
     } catch (error) {
       next(error);
@@ -43,6 +44,7 @@ export class UsersController {
           description,
         },
       });
+
       res.status(201).json(newUser);
     } catch (error) {
       next(error);
@@ -59,8 +61,8 @@ export class UsersController {
           address: true,
         },
       });
-
       if (!user) throw new HttpError(404, 'usuário não encontrado');
+
       res.json(user);
     } catch (error) {
       next(error);
@@ -78,7 +80,6 @@ export class UsersController {
       );
 
       const data = UpdateUserRequestSchema.parse(req.body);
-
       if (data.password) {
         data.password = await bcrypt.hash(data.password, 10);
       }
@@ -87,6 +88,7 @@ export class UsersController {
         data: data,
         where: { id: +req.params.id },
       });
+
       res.json(updatedUser);
     } catch (error) {
       next(error);
@@ -106,6 +108,7 @@ export class UsersController {
       const deletedUser = await prisma.user.delete({
         where: { id: +req.params.id },
       });
+
       res.json(deletedUser);
     } catch (error) {
       next(error);
