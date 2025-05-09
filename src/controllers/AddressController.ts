@@ -2,18 +2,54 @@ import { Handler } from 'express';
 import { prisma } from '../database';
 import {
   CreateAddressRequestSchema,
+  GetAddressRequestSchema,
   UpdateAddressRequestSchema,
 } from '../schemas/AddressRequestSchema';
 import { HttpError } from '../errors/HttpError';
 import { checkEntityExists } from '../validators/checkEntityExists';
+import { Prisma } from '../../generated/prisma';
 
 export class AddressController {
   // GET /address
   index: Handler = async (req, res, next) => {
     try {
-      const address = await prisma.address.findMany();
+      const {
+        street,
+        state,
+        zip,
+        page = '1',
+        pageSize = '10',
+        sortBy = 'street',
+        order = 'asc',
+      } = GetAddressRequestSchema.parse(req.query);
 
-      res.json(address);
+      const pageNumber = +page;
+      const pageSizeNumber = +pageSize;
+
+      const where: Prisma.AddressWhereInput = {};
+
+      if (street) where.street = { contains: street, mode: 'insensitive' };
+      if (state) where.state = state;
+      if (zip) where.zip = { contains: zip };
+
+      const address = await prisma.address.findMany({
+        where,
+        skip: (pageNumber - 1) * pageSizeNumber,
+        take: pageSizeNumber,
+        orderBy: { [sortBy]: order },
+      });
+
+      const total = await prisma.address.count({ where: where });
+
+      res.json({
+        data: address,
+        meta: {
+          page: pageNumber,
+          pageSize: pageSizeNumber,
+          total,
+          totalPages: Math.ceil(total / pageSizeNumber),
+        },
+      });
     } catch (error) {
       next(error);
     }
