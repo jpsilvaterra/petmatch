@@ -3,18 +3,54 @@ import { prisma } from '../database';
 import bcrypt from 'bcryptjs';
 import {
   CreateUserRequestSchema,
+  GetUsersRequestSchema,
   UpdateUserRequestSchema,
 } from '../schemas/UsersRequestSchema';
 import { HttpError } from '../errors/HttpError';
 import { checkEntityExists } from '../validators/checkEntityExists';
+import { Prisma } from '../../generated/prisma';
 
 export class UsersController {
   // GET /users
   index: Handler = async (req, res, next) => {
     try {
-      const users = await prisma.user.findMany();
+      const {
+        name,
+        email,
+        phone,
+        page = '1',
+        pageSize = '10',
+        sortBy = 'name',
+        order = 'asc',
+      } = GetUsersRequestSchema.parse(req.query);
 
-      res.json(users);
+      const pageNumber = +page;
+      const pageSizeNumber = +pageSize;
+
+      const where: Prisma.UserWhereInput = {};
+
+      if (name) where.name = { contains: name, mode: 'insensitive' };
+      if (email) where.email = { contains: email, mode: 'insensitive' };
+      if (phone) where.phone = { contains: phone };
+
+      const users = await prisma.user.findMany({
+        where,
+        skip: (pageNumber - 1) * pageSizeNumber,
+        take: pageSizeNumber,
+        orderBy: { [sortBy]: order },
+      });
+
+      const total = await prisma.user.count({ where: where });
+
+      res.json({
+        data: users,
+        meta: {
+          page: pageNumber,
+          pageSize: pageSizeNumber,
+          total,
+          totalPages: Math.ceil(total / pageSizeNumber),
+        },
+      });
     } catch (error) {
       next(error);
     }
