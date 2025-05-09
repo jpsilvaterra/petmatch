@@ -28,9 +28,7 @@ export class UsersController {
         where: { email },
       });
 
-      if (existingUser) {
-        res.status(400).json({ message: 'E-mail já cadastrado!' });
-      }
+      if (existingUser) throw new HttpError(400, 'Email já cadastrado');
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -44,7 +42,6 @@ export class UsersController {
           description,
         },
       });
-
       res.status(201).json(newUser);
     } catch (error) {
       next(error);
@@ -63,7 +60,6 @@ export class UsersController {
       });
 
       if (!user) throw new HttpError(404, 'usuário não encontrado');
-
       res.json(user);
     } catch (error) {
       next(error);
@@ -73,10 +69,19 @@ export class UsersController {
   // PUT /users/:id
   update: Handler = async (req, res, next) => {
     try {
-      const parsedData = UpdateUserRequestSchema.parse(req.body);
+      const user = await prisma.user.findUnique({
+        where: { id: +req.params.id },
+      });
+      if (!user) throw new HttpError(404, 'Usuário não encontrado');
+
+      const data = UpdateUserRequestSchema.parse(req.body);
+
+      if (data.password) {
+        data.password = await bcrypt.hash(data.password, 10);
+      }
 
       const updatedUser = await prisma.user.update({
-        data: parsedData,
+        data: data,
         where: { id: +req.params.id },
       });
       res.json(updatedUser);
@@ -87,9 +92,18 @@ export class UsersController {
 
   // DELETE /users/:id
   delete: Handler = async (req, res, next) => {
-    const deletedUser = await prisma.user.delete({
-      where: { id: +req.params.id },
-    });
-    res.json(deletedUser);
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: +req.params.id },
+      });
+      if (!user) throw new HttpError(404, 'Usuário não encontrado');
+
+      const deletedUser = await prisma.user.delete({
+        where: { id: +req.params.id },
+      });
+      res.json(deletedUser);
+    } catch (error) {
+      next(error);
+    }
   };
 }

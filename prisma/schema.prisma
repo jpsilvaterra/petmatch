@@ -37,7 +37,7 @@ model Pets {
   breed       String    @db.VarChar(255)
   birthDate   DateTime
   description String?
-  photo_url   String?
+  photoUrl    String?
   status      PetStatus @default(Unavailable)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
