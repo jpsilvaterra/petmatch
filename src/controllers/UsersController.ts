@@ -7,10 +7,18 @@ import {
   UpdateUserRequestSchema,
 } from '../schemas/UsersRequestSchema';
 import { HttpError } from '../errors/HttpError';
-import { checkEntityExists } from '../validators/checkEntityExists';
-import { Prisma } from '../../generated/prisma';
+import {
+  IUsersRepository,
+  IUserWhereParams,
+} from '../repositories/UsersRepository';
 
 export class UsersController {
+  private usersRepository: IUsersRepository;
+
+  constructor(usersRepository: IUsersRepository) {
+    this.usersRepository = usersRepository;
+  }
+
   // GET /users
   index: Handler = async (req, res, next) => {
     try {
@@ -24,31 +32,32 @@ export class UsersController {
         order = 'asc',
       } = GetUsersRequestSchema.parse(req.query);
 
-      const pageNumber = +page;
-      const pageSizeNumber = +pageSize;
+      const limit = +pageSize;
+      const offset = (+page - 1) * limit;
 
-      const where: Prisma.UserWhereInput = {};
+      const where: IUserWhereParams = {};
 
-      if (name) where.name = { contains: name, mode: 'insensitive' };
-      if (email) where.email = { contains: email, mode: 'insensitive' };
-      if (phone) where.phone = { contains: phone };
+      if (name) where.name = { like: name, mode: 'insensitive' };
+      if (email) where.email = { like: email, mode: 'insensitive' };
+      if (phone) where.phone = { like: phone };
 
-      const users = await prisma.user.findMany({
+      const users = await this.usersRepository.find({
         where,
-        skip: (pageNumber - 1) * pageSizeNumber,
-        take: pageSizeNumber,
-        orderBy: { [sortBy]: order },
+        sortBy,
+        order,
+        limit: limit,
+        offset: offset,
       });
 
-      const total = await prisma.user.count({ where: where });
+      const total = await this.usersRepository.count(where);
 
       res.json({
         data: users,
         meta: {
-          page: pageNumber,
-          pageSize: pageSizeNumber,
+          page: +page,
+          pageSize: limit,
           total,
-          totalPages: Math.ceil(total / pageSizeNumber),
+          totalPages: Math.ceil(total / limit),
         },
       });
     } catch (error) {
@@ -59,26 +68,21 @@ export class UsersController {
   // POST /users
   create: Handler = async (req, res, next) => {
     try {
-      const { name, email, password, phone, profilePictureUrl, description } =
+      const { name, email, phone, password, description, profilePictureUrl } =
         CreateUserRequestSchema.parse(req.body);
 
-      const existingUser = await prisma.user.findUnique({
-        where: { email },
-      });
-
+      const existingUser = await this.usersRepository.findByEmail(email);
       if (existingUser) throw new HttpError(400, 'Email já cadastrado');
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const newUser = await prisma.user.create({
-        data: {
-          name,
-          email,
-          password: hashedPassword,
-          phone,
-          profilePictureUrl,
-          description,
-        },
+      const newUser = await this.usersRepository.create({
+        name,
+        email,
+        phone,
+        password: hashedPassword,
+        description,
+        profilePictureUrl,
       });
 
       res.status(201).json(newUser);
@@ -90,13 +94,9 @@ export class UsersController {
   // GET /users/:id
   show: Handler = async (req, res, next) => {
     try {
-      const user = await prisma.user.findUnique({
-        where: { id: +req.params.id },
-        include: {
-          pets: true,
-          address: true,
-        },
-      });
+      const { id } = req.params;
+
+      const user = await this.usersRepository.findById(+id);
       if (!user) throw new HttpError(404, 'usuário não encontrado');
 
       res.json(user);
@@ -108,21 +108,24 @@ export class UsersController {
   // PUT /users/:id
   update: Handler = async (req, res, next) => {
     try {
-      await checkEntityExists(
-        'user',
-        'id',
-        +req.params.id,
-        'Usuário não encontrado'
-      );
+      const { id } = req.params;
 
-      const data = UpdateUserRequestSchema.parse(req.body);
-      if (data.password) {
-        data.password = await bcrypt.hash(data.password, 10);
+      const user = await this.usersRepository.findById(+id);
+      if (!user) throw new HttpError(404, 'Usuário não encontrado');
+
+      let { name, email, phone, password, description, profilePictureUrl } =
+        UpdateUserRequestSchema.parse(req.body);
+      if (password) {
+        password = await bcrypt.hash(password, 10);
       }
 
-      const updatedUser = await prisma.user.update({
-        data: data,
-        where: { id: +req.params.id },
+      const updatedUser = await this.usersRepository.updateById(+id, {
+        name,
+        email,
+        phone,
+        password,
+        description,
+        profilePictureUrl,
       });
 
       res.json(updatedUser);
@@ -134,16 +137,12 @@ export class UsersController {
   // DELETE /users/:id
   delete: Handler = async (req, res, next) => {
     try {
-      await checkEntityExists(
-        'user',
-        'id',
-        +req.params.id,
-        'Usuário não encontrado'
-      );
+      const { id } = req.params;
 
-      const deletedUser = await prisma.user.delete({
-        where: { id: +req.params.id },
-      });
+      const user = await this.usersRepository.findById(+id);
+      if (!user) throw new HttpError(404, 'Usuário não encontrado');
+
+      const deletedUser = await this.usersRepository.deleteById(+id);
 
       res.json(deletedUser);
     } catch (error) {

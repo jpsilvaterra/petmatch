@@ -1,13 +1,11 @@
 import { Router } from 'express';
-import { UsersController } from './controllers/UsersController';
-import { PetsController } from './controllers/PetsController';
-import { AddressController } from './controllers/AddressController';
+import {
+  addressController,
+  petsController,
+  usersController,
+} from './container';
 
 const router = Router();
-
-const usersController = new UsersController();
-const petsController = new PetsController();
-const addressControlelr = new AddressController();
 
 // rotas para users
 router.get('/users', usersController.index);
@@ -24,11 +22,11 @@ router.put('/pets/:id', petsController.update);
 router.delete('/pets/:id', petsController.delete);
 
 //rotas para address
-router.get('/address', addressControlelr.index);
-router.post('/address', addressControlelr.create);
-router.get('/address/:id', addressControlelr.show);
-router.put('/address/:id', addressControlelr.udpate);
-router.delete('/address/:id', addressControlelr.delete);
+router.get('/address', addressController.index);
+router.post('/address', addressController.create);
+router.get('/address/:id', addressController.show);
+router.put('/address/:id', addressController.udpate);
+router.delete('/address/:id', addressController.delete);
 
 // rota de teste
 router.get('/status', async (req, res, next) => {
