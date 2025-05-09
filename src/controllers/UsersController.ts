@@ -6,6 +6,7 @@ import {
   UpdateUserRequestSchema,
 } from '../schemas/UsersRequestSchema';
 import { HttpError } from '../errors/HttpError';
+import { checkEntityExists } from '../validators/checkEntityExists';
 
 export class UsersController {
   // GET /users
@@ -69,10 +70,12 @@ export class UsersController {
   // PUT /users/:id
   update: Handler = async (req, res, next) => {
     try {
-      const user = await prisma.user.findUnique({
-        where: { id: +req.params.id },
-      });
-      if (!user) throw new HttpError(404, 'Usuário não encontrado');
+      await checkEntityExists(
+        'user',
+        'id',
+        +req.params.id,
+        'Usuário não encontrado'
+      );
 
       const data = UpdateUserRequestSchema.parse(req.body);
 
@@ -93,10 +96,12 @@ export class UsersController {
   // DELETE /users/:id
   delete: Handler = async (req, res, next) => {
     try {
-      const user = await prisma.user.findUnique({
-        where: { id: +req.params.id },
-      });
-      if (!user) throw new HttpError(404, 'Usuário não encontrado');
+      await checkEntityExists(
+        'user',
+        'id',
+        +req.params.id,
+        'Usuário não encontrado'
+      );
 
       const deletedUser = await prisma.user.delete({
         where: { id: +req.params.id },

@@ -5,6 +5,7 @@ import {
   UpdatePetRequestSchema,
 } from '../schemas/PetsRequestSchema';
 import { HttpError } from '../errors/HttpError';
+import { checkEntityExists } from '../validators/checkEntityExists';
 
 export class PetsController {
   // GET /pets
@@ -59,10 +60,12 @@ export class PetsController {
   // PUT /pets/:id
   update: Handler = async (req, res, next) => {
     try {
-      const pet = await prisma.pets.findUnique({
-        where: { id: +req.params.id },
-      });
-      if (!pet) throw new HttpError(404, 'Pet não entrado');
+      await checkEntityExists(
+        'pets',
+        'id',
+        +req.params.id,
+        'Pet não encontrado'
+      );
 
       const data = UpdatePetRequestSchema.parse(req.body);
 
@@ -79,10 +82,12 @@ export class PetsController {
   // DELETE /pets/:id
   delete: Handler = async (req, res, next) => {
     try {
-      const pet = await prisma.pets.findUnique({
-        where: { id: +req.params.id },
-      });
-      if (!pet) throw new HttpError(404, 'Pet não entrado');
+      await checkEntityExists(
+        'pets',
+        'id',
+        +req.params.id,
+        'Pet não encontrado'
+      );
 
       const deletedPet = await prisma.pets.delete({
         where: { id: +req.params.id },
