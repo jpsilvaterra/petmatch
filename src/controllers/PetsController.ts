@@ -2,18 +2,54 @@ import { Handler } from 'express';
 import { prisma } from '../database';
 import {
   CreatePetRequestSchema,
+  GetPetsRequestSchema,
   UpdatePetRequestSchema,
 } from '../schemas/PetsRequestSchema';
 import { HttpError } from '../errors/HttpError';
 import { checkEntityExists } from '../validators/checkEntityExists';
+import { Prisma } from '../../generated/prisma';
 
 export class PetsController {
   // GET /pets
   index: Handler = async (req, res, next) => {
     try {
-      const pets = await prisma.pets.findMany();
+      const {
+        name,
+        breed,
+        status,
+        page = '1',
+        pageSize = '10',
+        sortBy = 'name',
+        order = 'asc',
+      } = GetPetsRequestSchema.parse(req.query);
 
-      res.json(pets);
+      const pageNumber = +page;
+      const pageSizeNumber = +pageSize;
+
+      const where: Prisma.PetsWhereInput = {};
+
+      if (name) where.name = { contains: name, mode: 'insensitive' };
+      if (breed) where.breed = { contains: breed, mode: 'insensitive' };
+      if (status) where.status = status;
+
+      const pets = await prisma.pets.findMany({
+        where,
+        skip: (pageNumber - 1) * pageSizeNumber,
+        take: pageSizeNumber,
+        orderBy: { [sortBy]: order },
+      });
+
+      const total = await prisma.pets.count({ where: where });
+
+      res.json({
+        data: pets,
+        meta: {
+          page: pageNumber,
+          pageSize: pageSizeNumber,
+          total,
+          totalPages: Math.ceil(total / pageSizeNumber),
+        },
+      });
     } catch (error) {
       next(error);
     }
