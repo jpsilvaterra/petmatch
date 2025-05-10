@@ -1,15 +1,22 @@
 import { Handler } from 'express';
-import { prisma } from '../database';
 import {
   CreatePetRequestSchema,
   GetPetsRequestSchema,
   UpdatePetRequestSchema,
 } from '../schemas/PetsRequestSchema';
 import { HttpError } from '../errors/HttpError';
-import { checkEntityExists } from '../validators/checkEntityExists';
-import { Prisma } from '../../generated/prisma';
+import {
+  IPetsRepository,
+  IPetWhereParams,
+} from '../repositories/PetsRepository';
 
 export class PetsController {
+  private petsRepository: IPetsRepository;
+
+  constructor(petsRepository: IPetsRepository) {
+    this.petsRepository = petsRepository;
+  }
+
   // GET /pets
   index: Handler = async (req, res, next) => {
     try {
@@ -23,31 +30,32 @@ export class PetsController {
         order = 'asc',
       } = GetPetsRequestSchema.parse(req.query);
 
-      const pageNumber = +page;
-      const pageSizeNumber = +pageSize;
+      const limit = +pageSize;
+      const offset = (+page - 1) * limit;
 
-      const where: Prisma.PetsWhereInput = {};
+      const where: IPetWhereParams = {};
 
-      if (name) where.name = { contains: name, mode: 'insensitive' };
-      if (breed) where.breed = { contains: breed, mode: 'insensitive' };
+      if (name) where.name = { like: name, mode: 'insensitive' };
+      if (breed) where.breed = { like: breed, mode: 'insensitive' };
       if (status) where.status = status;
 
-      const pets = await prisma.pets.findMany({
+      const pets = await this.petsRepository.find({
         where,
-        skip: (pageNumber - 1) * pageSizeNumber,
-        take: pageSizeNumber,
-        orderBy: { [sortBy]: order },
+        sortBy,
+        order,
+        limit: limit,
+        offset: offset,
       });
 
-      const total = await prisma.pets.count({ where: where });
+      const total = await this.petsRepository.count(where);
 
       res.json({
         data: pets,
         meta: {
-          page: pageNumber,
-          pageSize: pageSizeNumber,
+          page: +page,
+          pageSize: limit,
           total,
-          totalPages: Math.ceil(total / pageSizeNumber),
+          totalPages: Math.ceil(total / limit),
         },
       });
     } catch (error) {
@@ -61,15 +69,13 @@ export class PetsController {
       const { name, breed, birthDate, description, photoUrl, status } =
         CreatePetRequestSchema.parse(req.body);
 
-      const newPet = await prisma.pets.create({
-        data: {
-          name,
-          breed,
-          birthDate,
-          description,
-          photoUrl,
-          status,
-        },
+      const newPet = await this.petsRepository.create({
+        name,
+        breed,
+        birthDate,
+        description,
+        photoUrl,
+        status: status ?? 'Unavailable',
       });
 
       res.status(201).json(newPet);
@@ -81,12 +87,9 @@ export class PetsController {
   // GET /pets/:id
   show: Handler = async (req, res, next) => {
     try {
-      const pet = await prisma.pets.findUnique({
-        where: { id: +req.params.id },
-        include: {
-          owner: true,
-        },
-      });
+      const { id } = req.params;
+
+      const pet = await this.petsRepository.findById(+id);
       if (!pet) throw new HttpError(404, 'Pet não encontrado');
 
       res.json(pet);
@@ -98,18 +101,21 @@ export class PetsController {
   // PUT /pets/:id
   update: Handler = async (req, res, next) => {
     try {
-      await checkEntityExists(
-        'pets',
-        'id',
-        +req.params.id,
-        'Pet não encontrado'
-      );
+      const { id } = req.params;
 
-      const data = UpdatePetRequestSchema.parse(req.body);
+      const pet = await this.petsRepository.findById(+id);
+      if (!pet) throw new HttpError(404, 'Pet não encontrado');
 
-      const updatedPet = await prisma.pets.update({
-        data: data,
-        where: { id: +req.params.id },
+      const { name, breed, birthDate, description, photoUrl, status } =
+        UpdatePetRequestSchema.parse(req.body);
+
+      const updatedPet = await this.petsRepository.updateById(+id, {
+        name,
+        breed,
+        birthDate,
+        description,
+        photoUrl,
+        status,
       });
 
       res.json(updatedPet);
@@ -121,16 +127,13 @@ export class PetsController {
   // DELETE /pets/:id
   delete: Handler = async (req, res, next) => {
     try {
-      await checkEntityExists(
-        'pets',
-        'id',
-        +req.params.id,
-        'Pet não encontrado'
-      );
+      const { id } = req.params;
 
-      const deletedPet = await prisma.pets.delete({
-        where: { id: +req.params.id },
-      });
+      const pet = await this.petsRepository.findById(+id);
+      if (!pet) throw new HttpError(404, 'Pet não encontrado');
+
+      const deletedPet = await this.petsRepository.deleteById(+id);
+
       res.json(deletedPet);
     } catch (error) {
       next(error);

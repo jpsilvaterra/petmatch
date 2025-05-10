@@ -1,5 +1,4 @@
 import { Handler } from 'express';
-import { prisma } from '../database';
 import bcrypt from 'bcryptjs';
 import {
   CreateUserRequestSchema,

@@ -78,7 +78,7 @@ export class PrismaUsersRepository implements IUsersRepository {
     return prisma.user.create({ data: attributes });
   }
 
-  // Atualiza um usuário parcialmente, com base no ID
+  // Atualiza um usuário
   async updateById(
     id: number,
     attributes: Partial<ICreateUserAttributes>
@@ -89,7 +89,7 @@ export class PrismaUsersRepository implements IUsersRepository {
     });
   }
 
-  // Exclui um usuário com base no ID
+  // Exclui um usuário
   async deleteById(id: number): Promise<User> {
     return prisma.user.delete({ where: { id } });
   }
