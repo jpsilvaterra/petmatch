@@ -1,15 +1,22 @@
 import { Handler } from 'express';
-import { prisma } from '../database';
 import {
   CreateAddressRequestSchema,
   GetAddressRequestSchema,
   UpdateAddressRequestSchema,
 } from '../schemas/AddressRequestSchema';
 import { HttpError } from '../errors/HttpError';
-import { checkEntityExists } from '../validators/checkEntityExists';
-import { Prisma } from '../../generated/prisma';
+import {
+  IAddressRepository,
+  IAddressWhereParams,
+} from '../repositories/AddressRepository';
 
 export class AddressController {
+  private addressRepository: IAddressRepository;
+
+  constructor(addressRepository: IAddressRepository) {
+    this.addressRepository = addressRepository;
+  }
+
   // GET /address
   index: Handler = async (req, res, next) => {
     try {
@@ -23,31 +30,32 @@ export class AddressController {
         order = 'asc',
       } = GetAddressRequestSchema.parse(req.query);
 
-      const pageNumber = +page;
-      const pageSizeNumber = +pageSize;
+      const limit = +pageSize;
+      const offset = (+page - 1) * limit;
 
-      const where: Prisma.AddressWhereInput = {};
+      const where: IAddressWhereParams = {};
 
-      if (street) where.street = { contains: street, mode: 'insensitive' };
-      if (state) where.state = state;
-      if (zip) where.zip = { contains: zip };
+      if (street) where.street = { like: street, mode: 'insensitive' };
+      if (state) where.state = { like: state, mode: 'insensitive' };
+      if (zip) where.zip = { like: zip };
 
-      const address = await prisma.address.findMany({
+      const address = await this.addressRepository.find({
         where,
-        skip: (pageNumber - 1) * pageSizeNumber,
-        take: pageSizeNumber,
-        orderBy: { [sortBy]: order },
+        sortBy,
+        order,
+        limit: limit,
+        offset: offset,
       });
 
-      const total = await prisma.address.count({ where: where });
+      const total = await this.addressRepository.count(where);
 
       res.json({
         data: address,
         meta: {
-          page: pageNumber,
-          pageSize: pageSizeNumber,
+          page: +page,
+          pageSize: limit,
           total,
-          totalPages: Math.ceil(total / pageSizeNumber),
+          totalPages: Math.ceil(total / limit),
         },
       });
     } catch (error) {
@@ -60,12 +68,10 @@ export class AddressController {
     try {
       const { street, state, zip } = CreateAddressRequestSchema.parse(req.body);
 
-      const newAddress = await prisma.address.create({
-        data: {
-          street,
-          state,
-          zip,
-        },
+      const newAddress = await this.addressRepository.create({
+        street,
+        state,
+        zip,
       });
 
       res.status(201).json(newAddress);
@@ -77,12 +83,9 @@ export class AddressController {
   // GET /address/:id
   show: Handler = async (req, res, next) => {
     try {
-      const address = await prisma.address.findUnique({
-        where: { id: +req.params.id },
-        include: {
-          owners: true,
-        },
-      });
+      const { id } = req.params;
+
+      const address = await this.addressRepository.findById(+id);
       if (!address) throw new HttpError(404, 'Endereço não encontrado');
 
       res.json(address);
@@ -94,20 +97,18 @@ export class AddressController {
   // PUT /address/:id
   udpate: Handler = async (req, res, next) => {
     try {
-      await checkEntityExists(
-        'address',
-        'id',
-        +req.params.id,
-        'Endereço não encontrado'
-      );
+      const { id } = req.params;
 
-      const data = UpdateAddressRequestSchema.parse(req.body);
+      const address = await this.addressRepository.findById(+id);
+      if (!address) throw new HttpError(404, 'Endereço não encontrado');
 
-      const updatedAddress = await prisma.address.update({
-        data: data,
-        where: { id: +req.params.id },
+      const { street, state, zip } = UpdateAddressRequestSchema.parse(req.body);
+
+      const updatedAddress = await this.addressRepository.updateById(+id, {
+        street,
+        state,
+        zip,
       });
-
       res.json(updatedAddress);
     } catch (error) {
       next(error);
@@ -117,16 +118,12 @@ export class AddressController {
   // DELETE /address/:id
   delete: Handler = async (req, res, next) => {
     try {
-      await checkEntityExists(
-        'address',
-        'id',
-        +req.params.id,
-        'Endereço não encontrado'
-      );
+      const { id } = req.params;
 
-      const deletedAddress = await prisma.address.delete({
-        where: { id: +req.params.id },
-      });
+      const address = await this.addressRepository.findById(+id);
+      if (!address) throw new HttpError(404, 'Endereço não encontrado');
+
+      const deletedAddress = await this.addressRepository.deleteById(+id);
 
       res.json(deletedAddress);
     } catch (error) {

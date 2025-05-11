@@ -72,7 +72,7 @@ export class PrismaPetsRepository implements IPetsRepository {
     attributes: Partial<ICreatePetAttributes>
   ): Promise<Pets> {
     return await prisma.pets.update({
-      where: { id: +id },
+      where: { id: id },
       data: attributes,
     });
   }
@@ -80,7 +80,7 @@ export class PrismaPetsRepository implements IPetsRepository {
   // Exclui um pet
   async deleteById(id: number): Promise<Pets> {
     return await prisma.pets.delete({
-      where: { id: +id },
+      where: { id: id },
     });
   }
 }
