@@ -4,11 +4,6 @@ import {
   GetPetsRequestSchema,
   UpdatePetRequestSchema,
 } from '../schemas/PetsRequestSchema';
-import { HttpError } from '../errors/HttpError';
-import {
-  IPetsRepository,
-  IPetWhereParams,
-} from '../repositories/PetsRepository';
 import { PetsService } from '../services/PetsService';
 
 export class PetsController {
@@ -81,7 +76,6 @@ export class PetsController {
   update: Handler = async (req, res, next) => {
     try {
       const { id } = req.params;
-
       const { name, breed, birthDate, description, photoUrl, status } =
         UpdatePetRequestSchema.parse(req.body);
 

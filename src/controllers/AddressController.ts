@@ -4,18 +4,10 @@ import {
   GetAddressRequestSchema,
   UpdateAddressRequestSchema,
 } from '../schemas/AddressRequestSchema';
-import { HttpError } from '../errors/HttpError';
-import {
-  IAddressRepository,
-  IAddressWhereParams,
-} from '../repositories/AddressRepository';
+import { AddressService } from '../services/AddressService';
 
 export class AddressController {
-  private addressRepository: IAddressRepository;
-
-  constructor(addressRepository: IAddressRepository) {
-    this.addressRepository = addressRepository;
-  }
+  constructor(private readonly addressService: AddressService) {}
 
   // GET /address
   index: Handler = async (req, res, next) => {
@@ -30,34 +22,17 @@ export class AddressController {
         order = 'asc',
       } = GetAddressRequestSchema.parse(req.query);
 
-      const limit = +pageSize;
-      const offset = (+page - 1) * limit;
-
-      const where: IAddressWhereParams = {};
-
-      if (street) where.street = { like: street, mode: 'insensitive' };
-      if (state) where.state = { like: state, mode: 'insensitive' };
-      if (zip) where.zip = { like: zip };
-
-      const address = await this.addressRepository.find({
-        where,
+      const result = await this.addressService.getAllAdress({
+        street,
+        state,
+        zip,
+        page: +page,
+        pageSize: +pageSize,
         sortBy,
         order,
-        limit: limit,
-        offset: offset,
       });
 
-      const total = await this.addressRepository.count(where);
-
-      res.json({
-        data: address,
-        meta: {
-          page: +page,
-          pageSize: limit,
-          total,
-          totalPages: Math.ceil(total / limit),
-        },
-      });
+      res.json(result);
     } catch (error) {
       next(error);
     }
@@ -68,7 +43,7 @@ export class AddressController {
     try {
       const { street, state, zip } = CreateAddressRequestSchema.parse(req.body);
 
-      const newAddress = await this.addressRepository.create({
+      const newAddress = await this.addressService.createAddress({
         street,
         state,
         zip,
@@ -85,8 +60,7 @@ export class AddressController {
     try {
       const { id } = req.params;
 
-      const address = await this.addressRepository.findById(+id);
-      if (!address) throw new HttpError(404, 'Endereço não encontrado');
+      const address = await this.addressService.getAddressById(+id);
 
       res.json(address);
     } catch (error) {
@@ -98,17 +72,14 @@ export class AddressController {
   udpate: Handler = async (req, res, next) => {
     try {
       const { id } = req.params;
-
-      const address = await this.addressRepository.findById(+id);
-      if (!address) throw new HttpError(404, 'Endereço não encontrado');
-
       const { street, state, zip } = UpdateAddressRequestSchema.parse(req.body);
 
-      const updatedAddress = await this.addressRepository.updateById(+id, {
+      const updatedAddress = await this.addressService.udpateAddress(+id, {
         street,
         state,
         zip,
       });
+
       res.json(updatedAddress);
     } catch (error) {
       next(error);
@@ -120,10 +91,7 @@ export class AddressController {
     try {
       const { id } = req.params;
 
-      const address = await this.addressRepository.findById(+id);
-      if (!address) throw new HttpError(404, 'Endereço não encontrado');
-
-      const deletedAddress = await this.addressRepository.deleteById(+id);
+      const deletedAddress = await this.addressService.deleteAddress(+id);
 
       res.json(deletedAddress);
     } catch (error) {

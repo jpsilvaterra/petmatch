@@ -76,7 +76,6 @@ export class UsersController {
   update: Handler = async (req, res, next) => {
     try {
       const { id } = req.params;
-
       const { name, email, phone, password, description, profilePictureUrl } =
         UpdateUserRequestSchema.parse(req.body);
 

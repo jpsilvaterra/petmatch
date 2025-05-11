@@ -34,6 +34,16 @@ export interface ICreateAddressAttributes {
   zip: string;
 }
 
+export interface IGetAddressParams {
+  street?: string;
+  state?: string;
+  zip?: string;
+  page?: number;
+  pageSize?: number;
+  sortBy?: 'street' | 'state' | 'zip' | 'createdAt';
+  order?: 'asc' | 'desc';
+}
+
 // Interface do repositório de endereço com todos os métodos
 export interface IAddressRepository {
   find: (params: IFindAddressParams) => Promise<Address[]>;

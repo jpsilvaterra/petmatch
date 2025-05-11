@@ -14,10 +14,10 @@ export class PetsService {
       name,
       breed,
       status,
-      page = 1,
-      pageSize = 10,
       sortBy,
       order,
+      page = 1,
+      pageSize = 10,
     } = params;
 
     const limit = pageSize;
