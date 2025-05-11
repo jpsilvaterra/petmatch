@@ -37,6 +37,16 @@ export interface ICreateUserAttributes {
   description?: string;
 }
 
+export interface IGetUsersParams {
+  name?: string;
+  email?: string;
+  phone?: string;
+  page?: number;
+  pageSize?: number;
+  sortBy?: 'name' | 'email' | 'phone' | 'createdAt';
+  order?: 'asc' | 'desc';
+}
+
 // Interface do repositório de usuários com todos os métodos
 export interface IUsersRepository {
   find: (params: IFindUserParams) => Promise<User[]>;
