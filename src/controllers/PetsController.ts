@@ -9,13 +9,10 @@ import {
   IPetsRepository,
   IPetWhereParams,
 } from '../repositories/PetsRepository';
+import { PetsService } from '../services/PetsService';
 
 export class PetsController {
-  private petsRepository: IPetsRepository;
-
-  constructor(petsRepository: IPetsRepository) {
-    this.petsRepository = petsRepository;
-  }
+  constructor(private readonly petsService: PetsService) {}
 
   // GET /pets
   index: Handler = async (req, res, next) => {
@@ -24,40 +21,23 @@ export class PetsController {
         name,
         breed,
         status,
+        order,
+        sortBy,
         page = '1',
         pageSize = '10',
-        sortBy = 'name',
-        order = 'asc',
       } = GetPetsRequestSchema.parse(req.query);
 
-      const limit = +pageSize;
-      const offset = (+page - 1) * limit;
-
-      const where: IPetWhereParams = {};
-
-      if (name) where.name = { like: name, mode: 'insensitive' };
-      if (breed) where.breed = { like: breed, mode: 'insensitive' };
-      if (status) where.status = status;
-
-      const pets = await this.petsRepository.find({
-        where,
+      const result = await this.petsService.getAllPets({
+        name,
+        breed,
+        status,
+        page: +page,
+        pageSize: +pageSize,
         sortBy,
         order,
-        limit: limit,
-        offset: offset,
       });
 
-      const total = await this.petsRepository.count(where);
-
-      res.json({
-        data: pets,
-        meta: {
-          page: +page,
-          pageSize: limit,
-          total,
-          totalPages: Math.ceil(total / limit),
-        },
-      });
+      res.json(result);
     } catch (error) {
       next(error);
     }
@@ -69,7 +49,7 @@ export class PetsController {
       const { name, breed, birthDate, description, photoUrl, status } =
         CreatePetRequestSchema.parse(req.body);
 
-      const newPet = await this.petsRepository.create({
+      const newPet = await this.petsService.createPet({
         name,
         breed,
         birthDate,
@@ -89,8 +69,7 @@ export class PetsController {
     try {
       const { id } = req.params;
 
-      const pet = await this.petsRepository.findById(+id);
-      if (!pet) throw new HttpError(404, 'Pet não encontrado');
+      const pet = await this.petsService.getPetById(+id);
 
       res.json(pet);
     } catch (error) {
@@ -103,13 +82,10 @@ export class PetsController {
     try {
       const { id } = req.params;
 
-      const pet = await this.petsRepository.findById(+id);
-      if (!pet) throw new HttpError(404, 'Pet não encontrado');
-
       const { name, breed, birthDate, description, photoUrl, status } =
         UpdatePetRequestSchema.parse(req.body);
 
-      const updatedPet = await this.petsRepository.updateById(+id, {
+      const updatedPet = await this.petsService.udpatePet(+id, {
         name,
         breed,
         birthDate,
@@ -129,10 +105,7 @@ export class PetsController {
     try {
       const { id } = req.params;
 
-      const pet = await this.petsRepository.findById(+id);
-      if (!pet) throw new HttpError(404, 'Pet não encontrado');
-
-      const deletedPet = await this.petsRepository.deleteById(+id);
+      const deletedPet = await this.petsService.deletePet(+id);
 
       res.json(deletedPet);
     } catch (error) {

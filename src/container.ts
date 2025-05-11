@@ -5,6 +5,7 @@ import { PrismaUsersRepository } from './repositories/prisma/PrismaUsersReposito
 import { PrismaPetsRepository } from './repositories/prisma/PrismaPetsRepository';
 import { PrismaAddressRepository } from './repositories/prisma/PrismaAddressRepository';
 import { UsersService } from './services/UserServices';
+import { PetsService } from './services/PetsService';
 
 // repositories
 const usersRepository = new PrismaUsersRepository();
@@ -13,8 +14,9 @@ const addressRepository = new PrismaAddressRepository();
 
 //services
 export const usersService = new UsersService(usersRepository);
+export const petsServcie = new PetsService(petsRepository);
 
 // controllers
 export const usersController = new UsersController(usersService);
-export const petsController = new PetsController(petsRepository);
+export const petsController = new PetsController(petsServcie);
 export const addressController = new AddressController(addressRepository);

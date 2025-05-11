@@ -36,6 +36,16 @@ export interface ICreatePetAttributes {
   description?: string;
 }
 
+export interface IGetPetsParams {
+  name?: string;
+  breed?: string;
+  status?: PetStatus;
+  page?: number;
+  pageSize?: number;
+  sortBy?: 'name' | 'breed' | 'status' | 'createdAt';
+  order?: 'asc' | 'desc';
+}
+
 // Interface do repositório de pets com todos os métodos
 export interface IPetsRepository {
   find: (params: IFindPetParams) => Promise<Pets[]>;
