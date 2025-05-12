@@ -9,6 +9,7 @@ import {
 export class PetsService {
   constructor(private readonly petsRepository: IPetsRepository) {}
 
+  // busca todos os pets
   async getAllPets(params: IGetPetsParams) {
     const {
       name,
@@ -50,6 +51,7 @@ export class PetsService {
     };
   }
 
+  // cria um novo pet
   async createPet(params: ICreatePetAttributes) {
     const newPet = await this.petsRepository.create({
       name: params.name,
@@ -63,6 +65,7 @@ export class PetsService {
     return newPet;
   }
 
+  // busca um pet pelo ID
   async getPetById(petId: number) {
     const pet = await this.petsRepository.findById(petId);
     if (!pet) throw new HttpError(404, 'Pet não encontrado');
@@ -70,6 +73,7 @@ export class PetsService {
     return pet;
   }
 
+  // atualiza um pet
   async udpatePet(petId: number, params: Partial<ICreatePetAttributes>) {
     const pet = await this.petsRepository.findById(petId);
     if (!pet) throw new HttpError(404, 'Pet não encontrado');
@@ -86,6 +90,7 @@ export class PetsService {
     return updatedPet;
   }
 
+  // deleta um pet
   async deletePet(petId: number) {
     const pet = await this.petsRepository.findById(petId);
     if (!pet) throw new HttpError(404, 'Pet não encontrado');

@@ -34,6 +34,7 @@ export interface ICreateAddressAttributes {
   zip: string;
 }
 
+// Interface para os parâmetros de busca, paginação e ordenação na listagem de endereços
 export interface IGetAddressParams {
   street?: string;
   state?: string;

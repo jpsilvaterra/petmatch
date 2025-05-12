@@ -37,6 +37,7 @@ export interface ICreateUserAttributes {
   description?: string;
 }
 
+// Interface para os parâmetros de busca, paginação e ordenação na listagem de usuários
 export interface IGetUsersParams {
   name?: string;
   email?: string;

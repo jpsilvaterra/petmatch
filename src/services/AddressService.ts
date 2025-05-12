@@ -9,6 +9,7 @@ import {
 export class AddressService {
   constructor(private readonly addressRepository: IAddressRepository) {}
 
+  // busca todos os endereços
   async getAllAdress(params: IGetAddressParams) {
     const {
       street,
@@ -50,6 +51,7 @@ export class AddressService {
     };
   }
 
+  // cria um novo endereço
   async createAddress(params: ICreateAddressAttributes) {
     const newAddress = await this.addressRepository.create({
       street: params.street,
@@ -60,6 +62,7 @@ export class AddressService {
     return newAddress;
   }
 
+  // busca um endereço pelo ID
   async getAddressById(addressId: number) {
     const address = await this.addressRepository.findById(addressId);
     if (!address) throw new HttpError(404, 'Endereço não encontrado');
@@ -67,6 +70,7 @@ export class AddressService {
     return address;
   }
 
+  // atualiza um endereço
   async udpateAddress(
     addressId: number,
     params: Partial<ICreateAddressAttributes>
@@ -83,6 +87,7 @@ export class AddressService {
     return updatedAddress;
   }
 
+  // deleta um endereço
   async deleteAddress(addressId: number) {
     const address = await this.addressRepository.findById(addressId);
     if (!address) throw new HttpError(404, 'Endereço não encontrado');

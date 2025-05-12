@@ -36,6 +36,7 @@ export interface ICreatePetAttributes {
   description?: string;
 }
 
+// Interface para os parâmetros de busca, paginação e ordenação na listagem de pets
 export interface IGetPetsParams {
   name?: string;
   breed?: string;

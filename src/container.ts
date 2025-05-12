@@ -13,7 +13,7 @@ const usersRepository = new PrismaUsersRepository();
 const petsRepository = new PrismaPetsRepository();
 const addressRepository = new PrismaAddressRepository();
 
-//services
+// services
 export const usersService = new UsersService(usersRepository);
 export const petsServcie = new PetsService(petsRepository);
 export const addressService = new AddressService(addressRepository);
