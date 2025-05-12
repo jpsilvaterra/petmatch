@@ -1,130 +1,82 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.14">
-  <diagram name="Página-1" id="byVd-cGKzUGu6L8oe7Ub">
-    <mxGraphModel dx="946" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        <mxCell id="cuir3odMGSEPCRtanvPZ-27" value="ENDERECO" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="20" width="160" height="200" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-28" value="id:int&lt;div&gt;rua:string&lt;/div&gt;&lt;div&gt;cidade: string&lt;/div&gt;&lt;div&gt;estado: string&lt;/div&gt;&lt;div&gt;cep: string&lt;/div&gt;&lt;div&gt;pais: string&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-27">
-          <mxGeometry y="26" width="160" height="94" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-29" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-27">
-          <mxGeometry y="120" width="160" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-30" value="cadastrarEndereco()&lt;div&gt;editarEndereco()&lt;/div&gt;&lt;div&gt;excluirEndereco()&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-27">
-          <mxGeometry y="150" width="160" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-31" value="USUARIO" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="290" y="90" width="160" height="280" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-32" value="id: int&lt;div&gt;nome: string&lt;/div&gt;&lt;div&gt;email: string&lt;/div&gt;&lt;div&gt;senha: string&lt;/div&gt;&lt;div&gt;telefone: string&lt;/div&gt;&lt;div&gt;descricao: text&lt;/div&gt;&lt;div&gt;enderecoId: string&lt;/div&gt;&lt;div&gt;dataCriacao: datetime&lt;/div&gt;&lt;div&gt;dataAtualizacao: datetime&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-31">
-          <mxGeometry y="26" width="160" height="154" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-33" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-31">
-          <mxGeometry y="180" width="160" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-34" value="cadastrarUsuario()&lt;div&gt;listarUsuario()&lt;/div&gt;&lt;div&gt;editarUsuario()&lt;/div&gt;&lt;div&gt;deletarUsuario()&lt;/div&gt;&lt;div&gt;cadastrarAdocao()&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-31">
-          <mxGeometry y="188" width="160" height="92" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-35" value="ANIMAL" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="620" width="200" height="280" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-36" value="id: int&lt;div&gt;nome: string&lt;/div&gt;&lt;div&gt;raca: string&lt;/div&gt;&lt;div&gt;idade: int&lt;/div&gt;&lt;div&gt;donoId: int&lt;/div&gt;&lt;div&gt;enderecoId: int&lt;/div&gt;&lt;div&gt;descricao: text&lt;/div&gt;&lt;div&gt;status: enum {disponivel, adotado}&lt;/div&gt;&lt;div&gt;dataCriacao: datetime&lt;/div&gt;&lt;div&gt;dataAtualizacao: datetime&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-35">
-          <mxGeometry y="26" width="200" height="164" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-37" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-35">
-          <mxGeometry y="190" width="200" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-38" value="cadastrarAnimal()&lt;div&gt;listarAnimal()&lt;/div&gt;&lt;div&gt;editarAnimal()&lt;/div&gt;&lt;div&gt;deletarAnimal()&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-35">
-          <mxGeometry y="198" width="200" height="82" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-39" value="ADOCAO" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="10" y="400" width="320" height="240" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-40" value="id: int&lt;div&gt;animalId: int&lt;/div&gt;&lt;div&gt;adotanteId: int&lt;/div&gt;&lt;div&gt;status: enum {pendente, aprovado, rejeitado, cancelado}&lt;/div&gt;&lt;div&gt;dataSolicitacao: datetime&lt;/div&gt;&lt;div&gt;descricao: text&lt;/div&gt;&lt;div&gt;dataCriacao: datetime&lt;/div&gt;&lt;div&gt;dataAtualizacao: datetime&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-39">
-          <mxGeometry y="26" width="320" height="134" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-41" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-39">
-          <mxGeometry y="160" width="320" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-42" value="adicionarAdocao()&lt;div&gt;listarAdocao()&lt;/div&gt;&lt;div&gt;editarAdocao()&lt;/div&gt;&lt;div&gt;excluirAdocao()&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-39">
-          <mxGeometry y="168" width="320" height="72" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-43" value="DOACAO" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="510" y="400" width="310" height="260" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-44" value="id: int&lt;div&gt;animalId: int&lt;/div&gt;&lt;div&gt;doadorId: int&lt;/div&gt;&lt;div&gt;status: enum {pendente, aceita, recusada, cancelada&lt;/div&gt;&lt;div&gt;dataSolicitacao: datetime&lt;/div&gt;&lt;div&gt;dataDecisao: datetime&lt;/div&gt;&lt;div&gt;descricao: text&lt;/div&gt;&lt;div&gt;dataCriacao: datetime&lt;/div&gt;&lt;div&gt;dataAtualizacao: datetime&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-43">
-          <mxGeometry y="26" width="310" height="154" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-45" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-43">
-          <mxGeometry y="180" width="310" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-46" value="listarAdocao()&lt;div&gt;excluirAdocao()&lt;/div&gt;&lt;div&gt;adicionarAdocao()&lt;/div&gt;&lt;div&gt;editarAdocao()&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="cuir3odMGSEPCRtanvPZ-43">
-          <mxGeometry y="188" width="310" height="72" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-56" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;entryX=-0.01;entryY=0.902;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cuir3odMGSEPCRtanvPZ-32" target="cuir3odMGSEPCRtanvPZ-36">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="480" y="190" as="sourcePoint" />
-            <mxPoint x="600" y="190" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-57" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" connectable="0" vertex="1" parent="cuir3odMGSEPCRtanvPZ-56">
-          <mxGeometry x="-1" relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-58" value="1..*" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" connectable="0" vertex="1" parent="cuir3odMGSEPCRtanvPZ-56">
-          <mxGeometry x="1" relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-62" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;entryX=0;entryY=0.74;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.013;exitY=0.745;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="cuir3odMGSEPCRtanvPZ-28" target="cuir3odMGSEPCRtanvPZ-32">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="110" y="229.5" as="sourcePoint" />
-            <mxPoint x="270" y="229.5" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-63" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" connectable="0" vertex="1" parent="cuir3odMGSEPCRtanvPZ-62">
-          <mxGeometry x="-1" relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-64" value="1" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" connectable="0" vertex="1" parent="cuir3odMGSEPCRtanvPZ-62">
-          <mxGeometry x="1" relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-66" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1.025;exitY=0.128;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="cuir3odMGSEPCRtanvPZ-28">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="460" y="30" as="sourcePoint" />
-            <mxPoint x="620" y="30" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-67" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" connectable="0" vertex="1" parent="cuir3odMGSEPCRtanvPZ-66">
-          <mxGeometry x="-1" relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-68" value="1" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" connectable="0" vertex="1" parent="cuir3odMGSEPCRtanvPZ-66">
-          <mxGeometry x="1" relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-69" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1.013;exitY=0.864;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.332;entryY=-0.019;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cuir3odMGSEPCRtanvPZ-32" target="cuir3odMGSEPCRtanvPZ-43">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="480" y="310" as="sourcePoint" />
-            <mxPoint x="640" y="310" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-70" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" connectable="0" vertex="1" parent="cuir3odMGSEPCRtanvPZ-69">
-          <mxGeometry x="-1" relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-71" value="1..*" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" connectable="0" vertex="1" parent="cuir3odMGSEPCRtanvPZ-69">
-          <mxGeometry x="1" relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-72" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.083;exitDx=0;exitDy=0;exitPerimeter=0;entryX=-0.005;entryY=0.171;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cuir3odMGSEPCRtanvPZ-39" target="cuir3odMGSEPCRtanvPZ-38">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="600" y="340" as="sourcePoint" />
-            <mxPoint x="720" y="310" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-73" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" connectable="0" vertex="1" parent="cuir3odMGSEPCRtanvPZ-72">
-          <mxGeometry x="-1" relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="cuir3odMGSEPCRtanvPZ-74" value="1" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" connectable="0" vertex="1" parent="cuir3odMGSEPCRtanvPZ-72">
-          <mxGeometry x="1" relative="1" as="geometry" />
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
+<mxfile host="65bd71144e">
+    <diagram name="Página-1" id="byVd-cGKzUGu6L8oe7Ub">
+        <mxGraphModel dx="374" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-27" value="ENDERECO" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="20" width="160" height="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-28" value="id:int&lt;div&gt;rua:string&lt;/div&gt;&lt;div&gt;cidade: string&lt;/div&gt;&lt;div&gt;estado: string&lt;/div&gt;&lt;div&gt;cep: string&lt;/div&gt;&lt;div&gt;pais: string&lt;/div&gt;&lt;div&gt;&lt;div&gt;dataCriacao: datetime&lt;/div&gt;&lt;div&gt;dataAtualizacao: datetime&lt;/div&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="cuir3odMGSEPCRtanvPZ-27" vertex="1">
+                    <mxGeometry y="26" width="160" height="134" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-29" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="cuir3odMGSEPCRtanvPZ-27" vertex="1">
+                    <mxGeometry y="160" width="160" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-30" value="&lt;div&gt;listarEndereco()&lt;/div&gt;cadastrarEndereco()&lt;div&gt;editarEndereco()&lt;/div&gt;&lt;div&gt;excluirEndereco()&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="cuir3odMGSEPCRtanvPZ-27" vertex="1">
+                    <mxGeometry y="190" width="160" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-31" value="USUARIO" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="90" width="160" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-32" value="id: int&lt;div&gt;nome: string&lt;/div&gt;&lt;div&gt;email: string&lt;/div&gt;&lt;div&gt;senha: string&lt;/div&gt;&lt;div&gt;fotoDePerfil: string&lt;/div&gt;&lt;div&gt;telefone: string&lt;/div&gt;&lt;div&gt;descricao: text&lt;/div&gt;&lt;div&gt;enderecoId: number&lt;/div&gt;&lt;div&gt;dataCriacao: datetime&lt;/div&gt;&lt;div&gt;dataAtualizacao: datetime&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="cuir3odMGSEPCRtanvPZ-31" vertex="1">
+                    <mxGeometry y="26" width="160" height="154" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-33" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="cuir3odMGSEPCRtanvPZ-31" vertex="1">
+                    <mxGeometry y="180" width="160" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-34" value="cadastrarUsuario()&lt;div&gt;listarUsuario()&lt;/div&gt;&lt;div&gt;editarUsuario()&lt;/div&gt;&lt;div&gt;deletarUsuario()&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="cuir3odMGSEPCRtanvPZ-31" vertex="1">
+                    <mxGeometry y="188" width="160" height="92" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-35" value="ANIMAL" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="620" width="230" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-36" value="id: int&lt;div&gt;nome: string&lt;/div&gt;&lt;div&gt;raca: string&lt;/div&gt;&lt;div&gt;dataAniversario: date&lt;/div&gt;&lt;div&gt;donoId: int&lt;/div&gt;&lt;div&gt;enderecoId: int,&lt;/div&gt;&lt;div&gt;fotoUrl: string,&lt;/div&gt;&lt;div&gt;descricao: text&lt;/div&gt;&lt;div&gt;status: enum {disponivel, indisponível}&lt;/div&gt;&lt;div&gt;dataCriacao: datetime&lt;/div&gt;&lt;div&gt;dataAtualizacao: datetime&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="cuir3odMGSEPCRtanvPZ-35" vertex="1">
+                    <mxGeometry y="26" width="230" height="164" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-37" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="cuir3odMGSEPCRtanvPZ-35" vertex="1">
+                    <mxGeometry y="190" width="230" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-38" value="cadastrarAnimal()&lt;div&gt;listarAnimal()&lt;/div&gt;&lt;div&gt;editarAnimal()&lt;/div&gt;&lt;div&gt;deletarAnimal()&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="cuir3odMGSEPCRtanvPZ-35" vertex="1">
+                    <mxGeometry y="198" width="230" height="82" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-56" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;entryX=-0.01;entryY=0.902;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="cuir3odMGSEPCRtanvPZ-32" target="cuir3odMGSEPCRtanvPZ-36" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="480" y="190" as="sourcePoint"/>
+                        <mxPoint x="600" y="190" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-57" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" parent="cuir3odMGSEPCRtanvPZ-56" connectable="0" vertex="1">
+                    <mxGeometry x="-1" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-58" value="1..*" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" parent="cuir3odMGSEPCRtanvPZ-56" connectable="0" vertex="1">
+                    <mxGeometry x="1" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-62" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;entryX=0;entryY=0.74;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.013;exitY=0.745;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="cuir3odMGSEPCRtanvPZ-28" target="cuir3odMGSEPCRtanvPZ-32" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="110" y="229.5" as="sourcePoint"/>
+                        <mxPoint x="270" y="229.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-63" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" parent="cuir3odMGSEPCRtanvPZ-62" connectable="0" vertex="1">
+                    <mxGeometry x="-1" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-64" value="1" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" parent="cuir3odMGSEPCRtanvPZ-62" connectable="0" vertex="1">
+                    <mxGeometry x="1" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-66" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1.025;exitY=0.128;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="cuir3odMGSEPCRtanvPZ-28" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="460" y="30" as="sourcePoint"/>
+                        <mxPoint x="620" y="30" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-67" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" parent="cuir3odMGSEPCRtanvPZ-66" connectable="0" vertex="1">
+                    <mxGeometry x="-1" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="cuir3odMGSEPCRtanvPZ-68" value="1" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" parent="cuir3odMGSEPCRtanvPZ-66" connectable="0" vertex="1">
+                    <mxGeometry x="1" relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
 </mxfile>
