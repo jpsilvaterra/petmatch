@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { PetStatusSchema } from './PetsRequestSchema';
 
 // schema de busca de usuário
 export const GetUsersRequestSchema = z.object({
@@ -29,4 +30,23 @@ export const UpdateUserRequestSchema = z.object({
   phone: z.string().optional(),
   profilePictureUrl: z.string().optional(),
   description: z.string().optional(),
+});
+
+// schema de busca os pets de um usuário
+export const GetUserPetsRequestSchema = z.object({
+  name: z.string().optional(),
+  page: z.string().optional(),
+  pageSize: z.string().optional(),
+  sortBy: z.enum(['name', 'createdAt']).optional(),
+  order: z.enum(['asc', 'desc']).optional(),
+});
+
+export const CreateUserPetsRequestSchema = z.object({
+  ownerId: z.number(),
+  name: z.string(),
+  breed: z.string(),
+  birthDate: z.coerce.date(),
+  description: z.string().optional(),
+  photoUrl: z.string().optional(),
+  status: PetStatusSchema.optional(),
 });

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 // schema de status dos pets
-const PetStatusSchema = z.enum(['Unavailable', 'Available']);
+export const PetStatusSchema = z.enum(['Unavailable', 'Available']);
 
 // schema de busca de pets
 export const GetPetsRequestSchema = z.object({
