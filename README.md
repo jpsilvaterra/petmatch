@@ -1,164 +1,72 @@
-# 🐾 PetMatch
+# 🐾 PetMatch API
 
-**PetMatch** é uma plataforma que conecta adotantes e doadores de animais de estimação.  
-O sistema permite o cadastro de usuários, a gestão de animais disponíveis para adoção e o registro dos processos de adoções e doações.
+Aplicação desenvolvida com Node.js e TypeScript para facilitar o processo de adoção de animais, conectando usuários interessados com ONGs e protetores independentes. Ideal para projetos sociais, acadêmicos ou ONGs de proteção animal.
+
+## 🎯 Objetivo
+
+Fornecer uma API RESTful escalável e segura para cadastro e gerenciamento de animais disponíveis para adoção, incluindo perfis de ONGs, protetores e adotantes. O sistema também registra e organiza informações sobre os pets, usuários e adoções.
+
+## 🚧 Projeto ainda em desenvolvimento... 🚧
+---
+
+## ⚙️ Funcionalidades
+
+- ✅ **Cadastro e Gerenciamento de Animais**
+  - Cadastro de pets com informações como nome, espécie, porte e histórico
+  - Atualização e remoção de animais disponíveis para adoção
+
+- 👥 **Cadastro de Usuários e ONGs**
+  - Usuários podem se cadastrar como protetores, ONGs ou adotantes
+  - Gerenciamento de perfis via API
+
+- 📦 **Adoções e Histórico**
+  - Registro de adoções com vínculo entre usuário e animal
+  - Visualização de histórico e status da adoção
+
+- 🧱 **Persistência com Prisma ORM**
+  - Integração com banco de dados relacional (PostgreSQL)
+  - Migrações e modelos de dados com Prisma
+
+- 🌐 **Documentação e Diagramas**
+  - Diagrama de classes e modelo de banco em formato `.drawio`
+  - Organização modular por pastas
 
 ---
 
-## 📚 Entidades e Relacionamentos
+## 🧪 Tecnologias Utilizadas
 
-- **Usuário**: Realiza o cadastro de animais ou busca por adoção. Pode ser **doador** ou **adotante**.
-- **Animal**: Representa o pet disponível para doação ou adoção.
-- **Adoção**: Registra o processo de um usuário adotando um animal.
-- **Doação**: Registra o processo de um usuário doando um animal.
-
-**Relacionamentos:**
-
-- Um **usuário** pode cadastrar vários **animais**.
-- Um **animal** pode estar associado a um processo de **adoção** ou **doação**.
-- Um **usuário** pode realizar várias **adoções** e **doações**.
+- Node.js — Ambiente de execução JavaScript server-side  
+- TypeScript — Superset de JavaScript com tipagem estática  
+- Express.js — Framework leve para construção de APIs  
+- Prisma ORM — ORM moderno para bancos relacionais  
+- dotenv — Configuração de variáveis de ambiente  
+- PostgreSQL — Banco de dados relacional  
+- Draw.io — Diagramas de entidade-relacionamento e classes  
 
 ---
 
-## 🧩 Funcionalidades por Tela
+## 🚀 Como rodar o projeto
 
-### Usuário
-
-- **Campos de Cadastro:**
-  - Nome
-  - E-mail
-  - Telefone
-  - Endereço
-  - Tipo de usuário (Adotante / Doador)
-
-- **Campos Obrigatórios:**
-  - Nome
-  - E-mail
-  - Tipo de usuário
-
-- **Validações:**
-  - E-mail válido
-  - Telefone no formato (XX) XXXXX-XXXX
-
-- **Dados de Listagem:**
-  - Nome
-  - E-mail
-  - Tipo de usuário
-
-- **Campos de Busca:**
-  - Nome
-  - Tipo de usuário
-
-- **Campos Editáveis:**
-  - Nome
-  - E-mail
-  - Telefone
-  - Endereço
-
-- **Fluxos:**
-  - **Edição:** Selecionar usuário > Editar campos permitidos > Salvar.
-  - **Exclusão:** Selecionar usuário > Clicar em excluir > Confirmar.
-
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/seu-usuario/petmatch.git
+   cd petmatch
+2. **Configure as variáveis de ambiente**
+   - Renomeie .env.example para .env e preencha com suas configurações
+3. **Instale as dependências**
+   ```bash
+   npm install
+4. **Execute as migrações**
+   ```bash
+   npx prisma migrate dev
+5. **Inicie o servidor**
+   ```bash
+   npm run dev
 ---
+## 🖼️ Diagramas
 
-### Animal
+- **diagrama de classes.drawio**
+  - Relacionamento entre entidades do sistema
 
-- **Campos de Cadastro:**
-  - Nome do animal
-  - Espécie
-  - Raça
-  - Idade
-  - Porte
-  - Status (Disponível para adoção ou doação)
-
-- **Campos Obrigatórios:**
-  - Nome
-  - Espécie
-  - Status
-
-- **Validações:**
-  - Idade deve ser um número válido
-
-- **Dados de Listagem:**
-  - Nome
-  - Espécie
-  - Porte
-  - Status
-
-- **Campos de Busca:**
-  - Nome do animal
-  - Espécie
-  - Porte
-
-- **Campos Editáveis:**
-  - Todos (Nome, Espécie, Raça, Idade, Porte, Status)
-
-- **Fluxos:**
-  - **Edição:** Selecionar animal > Editar campos > Salvar.
-  - **Exclusão:** Selecionar animal > Clicar em excluir > Confirmar.
-
----
-
-### Adoção
-
-- **Campos de Cadastro:**
-  - Usuário (Adotante)
-  - Animal
-  - Data da adoção
-
-- **Campos Obrigatórios:**
-  - Usuário
-  - Animal
-
-- **Validações:**
-  - Um animal só pode ser adotado uma vez (não pode ter múltiplas adoções ativas).
-
-- **Dados de Listagem:**
-  - Nome do adotante
-  - Nome do animal
-  - Data da adoção
-
-- **Campos de Busca:**
-  - Nome do adotante
-  - Nome do animal
-
-- **Campos Editáveis:**
-  - Nenhum campo pode ser alterado após confirmação (opcionalmente, apenas a data).
-
-- **Fluxos:**
-  - **Edição:** (Se permitido) Editar a data da adoção.
-  - **Exclusão:** Selecionar adoção > Clicar em excluir > Confirmar.
-
----
-
-### Doação
-
-- **Campos de Cadastro:**
-  - Usuário (Doador)
-  - Animal
-  - Data da doação
-
-- **Campos Obrigatórios:**
-  - Usuário
-  - Animal
-
-- **Validações:**
-  - Um animal doado não pode ser doado novamente.
-
-- **Dados de Listagem:**
-  - Nome do doador
-  - Nome do animal
-  - Data da doação
-
-- **Campos de Busca:**
-  - Nome do doador
-  - Nome do animal
-
-- **Campos Editáveis:**
-  - Nenhum (padrão; opcionalmente apenas a data da doação).
-
-- **Fluxos:**
-  - **Edição:** (Se necessário) Editar a data da doação.
-  - **Exclusão:** Selecionar doação > Clicar em excluir > Confirmar.
-
----
+- **PetMatch_bd.drawio**
+  - Modelo relacional do banco de dados
