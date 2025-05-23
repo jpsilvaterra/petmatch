@@ -1,10 +1,10 @@
 # 🐾 PetMatch API
 
-Aplicação desenvolvida com Node.js e TypeScript para facilitar o processo de adoção de animais, conectando usuários interessados com ONGs e protetores independentes. Ideal para projetos sociais, acadêmicos ou ONGs de proteção animal.
+Projeto de faculdade desenvolvido com Node.js e TypeScript para facilitar o processo de adoção de animais, conectando usuários interessados com ONGs e protetores independentes. Ideal para projetos sociais, acadêmicos ou ONGs de proteção animal.
 
 ## 🎯 Objetivo
 
-Fornecer uma API RESTful escalável e segura para cadastro e gerenciamento de animais disponíveis para adoção, incluindo perfis de ONGs, protetores e adotantes. O sistema também registra e organiza informações sobre os pets, usuários e adoções.
+Desenvolver uma plataforma web intuitiva e acessível para facilitar o processo de adoção de animais. O objetivo principal é conectar pessoas interessadas em adotar um pet com ONGs e protetores independentes que disponibilizam animais para adoção. A aplicação permite o cadastro, visualização e gerenciamento de perfis de usuários e animais, tornando o processo mais transparente, organizado e eficiente.
 
 ## 🚧 Projeto ainda em desenvolvimento... 🚧
 ---
